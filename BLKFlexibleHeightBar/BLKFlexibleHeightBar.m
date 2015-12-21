@@ -188,6 +188,137 @@
     // Interpolate alpha
     CGFloat alpha = [self interpolateFromValue:floorLayoutAttributes.alpha toValue:ceilingLayoutAttributes.alpha withProgress:relativeProgress];
     
+    // Interpolate Text Color
+    size_t floorNumberOfComponents = CGColorGetNumberOfComponents(floorLayoutAttributes.textColor.CGColor);
+    size_t ceilingNumberOfComponents = CGColorGetNumberOfComponents(ceilingLayoutAttributes.textColor.CGColor);
+    
+    const CGFloat *floorComponents = CGColorGetComponents(floorLayoutAttributes.textColor.CGColor);
+    const CGFloat *ceilingComponents = CGColorGetComponents(ceilingLayoutAttributes.textColor.CGColor);
+    
+    UIColor *textColor;
+    if (floorLayoutAttributes.textColor && ceilingLayoutAttributes.textColor)
+    {
+        if (floorNumberOfComponents == 2)
+        {
+            CGFloat floorWhite = floorComponents[0];
+            CGFloat floorAlpha = floorComponents[1];
+            
+            if (ceilingNumberOfComponents == 2)
+            {
+                CGFloat ceilingWhite = ceilingComponents[0];
+                CGFloat ceilingAlpha = ceilingComponents[1];
+                textColor = [UIColor colorWithRed:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                            green:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                             blue:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                            alpha:[self interpolateFromValue:floorAlpha
+                                                                     toValue:ceilingAlpha
+                                                                withProgress:relativeProgress]];
+            }
+            else if (ceilingNumberOfComponents == 4)
+            {
+                CGFloat ceilingRed = ceilingComponents[0];
+                CGFloat ceilingGreen = ceilingComponents[1];
+                CGFloat ceilingBlue = ceilingComponents[2];
+                CGFloat ceilingAlpha = ceilingComponents[3];
+                textColor = [UIColor colorWithRed:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingRed
+                                                                withProgress:relativeProgress]
+                                            green:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingGreen
+                                                                withProgress:relativeProgress]
+                                             blue:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingBlue
+                                                                withProgress:relativeProgress]
+                                            alpha:[self interpolateFromValue:floorAlpha
+                                                                     toValue:ceilingAlpha
+                                                                withProgress:relativeProgress]];
+            }
+            else
+            {
+                textColor = floorLayoutAttributes.textColor;
+            }
+        }
+        else if (floorNumberOfComponents == 4)
+        {
+            CGFloat floorRed = floorComponents[0];
+            CGFloat floorGreen = floorComponents[1];
+            CGFloat floorBlue = floorComponents[2];
+            CGFloat floorAlpha = floorComponents[3];
+            
+            if (ceilingNumberOfComponents == 2)
+            {
+                CGFloat ceilingWhite = ceilingComponents[0];
+                CGFloat ceilingAlpha = ceilingComponents[1];
+                textColor = [UIColor colorWithRed:[self interpolateFromValue:floorRed
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                            green:[self interpolateFromValue:floorGreen
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                             blue:[self interpolateFromValue:floorBlue
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                            alpha:[self interpolateFromValue:floorAlpha
+                                                                     toValue:ceilingAlpha
+                                                                withProgress:relativeProgress]];
+            }
+            else if (ceilingNumberOfComponents == 4)
+            {
+                CGFloat ceilingRed = ceilingComponents[0];
+                CGFloat ceilingGreen = ceilingComponents[1];
+                CGFloat ceilingBlue = ceilingComponents[2];
+                CGFloat ceilingAlpha = ceilingComponents[3];
+                textColor = [UIColor colorWithRed:[self interpolateFromValue:floorRed
+                                                                     toValue:ceilingRed
+                                                                withProgress:relativeProgress]
+                                            green:[self interpolateFromValue:floorGreen
+                                                                     toValue:ceilingGreen
+                                                                withProgress:relativeProgress]
+                                             blue:[self interpolateFromValue:floorBlue
+                                                                     toValue:ceilingBlue
+                                                                withProgress:relativeProgress]
+                                            alpha:[self interpolateFromValue:floorAlpha
+                                                                     toValue:ceilingAlpha
+                                                                withProgress:relativeProgress]];
+            }
+            else
+            {
+                textColor = floorLayoutAttributes.textColor;
+            }
+        }
+        else
+        {
+            textColor = floorLayoutAttributes.textColor;
+        }
+    }
+    else
+    {
+        textColor = nil;
+    }
+    
+    // Interpolate Corner Radius
+    CGFloat cornerRadius = [self interpolateFromValue:floorLayoutAttributes.cornerRadius
+                                              toValue:ceilingLayoutAttributes.cornerRadius
+                                         withProgress:relativeProgress];
+    
+    // Interpolate Font PointSize
+    CGFloat fontPointSize;
+    if (floorLayoutAttributes.fontPointSize > 0.0f && ceilingLayoutAttributes.fontPointSize > 0.0f)
+    {
+        fontPointSize = [self interpolateFromValue:floorLayoutAttributes.fontPointSize
+                                           toValue:ceilingLayoutAttributes.fontPointSize
+                                      withProgress:relativeProgress];
+    }
+    else
+    {
+        fontPointSize = 0.0f;
+    }
     
     // Apply updated attributes
     subview.layer.transform = transform3D;
@@ -200,6 +331,19 @@
     subview.alpha = alpha;
     subview.layer.zPosition = floorLayoutAttributes.zIndex;
     subview.hidden = floorLayoutAttributes.isHidden;
+    if (textColor && [subview respondsToSelector:@selector(setTextColor:)])
+    {
+        [subview performSelector:@selector(setTextColor:) withObject:textColor];
+    }
+    subview.layer.cornerRadius = cornerRadius;
+    if ([subview respondsToSelector:@selector(font)] && fontPointSize > 0.0f)
+    {
+        UIFont *font = [subview performSelector:@selector(font)];
+        if ([subview respondsToSelector:@selector(setFont:)])
+        {
+            [subview performSelector:@selector(setFont:) withObject:[UIFont fontWithName:font.familyName size:fontPointSize]];
+        }
+    }
 }
 
 - (CGFloat)interpolateFromValue:(CGFloat)fromValue toValue:(CGFloat)toValue withProgress:(CGFloat)progress

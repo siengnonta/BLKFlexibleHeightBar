@@ -34,6 +34,9 @@
         _alpha = 1.0;
         _zIndex = 0;
         _hidden = NO;
+        _textColor = nil;
+        _cornerRadius = 0.0f;
+        _fontPointSize = 0.0f;
     }
     
     return self;
@@ -52,6 +55,9 @@
         _alpha = layoutAttributes.alpha;
         _zIndex = layoutAttributes.zIndex;
         _hidden = layoutAttributes.hidden;
+        _textColor = layoutAttributes.textColor;
+        _cornerRadius = layoutAttributes.cornerRadius;
+        _fontPointSize = layoutAttributes.fontPointSize;
     }
     
     return self;
@@ -122,6 +128,21 @@
     {
         _frame = CGRectNull;
     }
+}
+
+- (void)setTextColor:(UIColor *)textColor
+{
+    _textColor = textColor;
+}
+
+- (void)setCornerRadius:(CGFloat)cornerRadius
+{
+    _cornerRadius = cornerRadius;
+}
+
+- (void)setFontPointSize:(CGFloat)fontPointSize
+{
+    _fontPointSize = fontPointSize;
 }
 
 @end

@@ -83,6 +83,11 @@
  */
 @property (nonatomic, getter=isHidden) BOOL hidden;
 
+@property (nonatomic) UIColor *textColor;
+
+@property (nonatomic) CGFloat cornerRadius;
+
+@property (nonatomic) CGFloat fontPointSize;
 
 /**
  A convenience initializer that returns layout attributes with the same property values as the specified layout attributes, or nil of initialization fails.
