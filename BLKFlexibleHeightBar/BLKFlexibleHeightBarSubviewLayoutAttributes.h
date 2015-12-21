@@ -88,6 +88,7 @@
 @property (nonatomic) CGFloat cornerRadius;
 
 @property (nonatomic) CGFloat borderWidth;
+@property (nonatomic) UIColor *borderColor;
 
 @property (nonatomic) CGFloat fontPointSize;
 

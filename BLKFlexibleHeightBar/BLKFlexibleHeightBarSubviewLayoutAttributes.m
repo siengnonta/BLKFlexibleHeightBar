@@ -37,6 +37,7 @@
         _textColor = nil;
         _cornerRadius = 0.0f;
         _borderWidth = 0.0f;
+        _borderColor = nil;
         _fontPointSize = 0.0f;
     }
     
@@ -59,6 +60,7 @@
         _textColor = layoutAttributes.textColor;
         _cornerRadius = layoutAttributes.cornerRadius;
         _borderWidth = layoutAttributes.borderWidth;
+        _borderColor = layoutAttributes.borderColor;
         _fontPointSize = layoutAttributes.fontPointSize;
     }
     
@@ -145,6 +147,11 @@
 - (void)setBorderWidth:(CGFloat)borderWidth
 {
     _borderWidth = borderWidth;
+}
+
+- (void)setBorderColor:(UIColor *)borderColor
+{
+    _borderColor = borderColor;
 }
 
 - (void)setFontPointSize:(CGFloat)fontPointSize

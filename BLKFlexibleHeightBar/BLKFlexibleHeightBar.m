@@ -189,15 +189,15 @@
     CGFloat alpha = [self interpolateFromValue:floorLayoutAttributes.alpha toValue:ceilingLayoutAttributes.alpha withProgress:relativeProgress];
     
     // Interpolate Text Color
-    size_t floorNumberOfComponents = CGColorGetNumberOfComponents(floorLayoutAttributes.textColor.CGColor);
-    size_t ceilingNumberOfComponents = CGColorGetNumberOfComponents(ceilingLayoutAttributes.textColor.CGColor);
-    
-    const CGFloat *floorComponents = CGColorGetComponents(floorLayoutAttributes.textColor.CGColor);
-    const CGFloat *ceilingComponents = CGColorGetComponents(ceilingLayoutAttributes.textColor.CGColor);
-    
     UIColor *textColor;
     if (floorLayoutAttributes.textColor && ceilingLayoutAttributes.textColor)
     {
+        size_t floorNumberOfComponents = CGColorGetNumberOfComponents(floorLayoutAttributes.textColor.CGColor);
+        size_t ceilingNumberOfComponents = CGColorGetNumberOfComponents(ceilingLayoutAttributes.textColor.CGColor);
+        
+        const CGFloat *floorComponents = CGColorGetComponents(floorLayoutAttributes.textColor.CGColor);
+        const CGFloat *ceilingComponents = CGColorGetComponents(ceilingLayoutAttributes.textColor.CGColor);
+        
         if (floorNumberOfComponents == 2)
         {
             CGFloat floorWhite = floorComponents[0];
@@ -312,6 +312,120 @@
                                              toValue:ceilingLayoutAttributes.borderWidth
                                         withProgress:relativeProgress];
     
+    // Interpolate Border Color
+    UIColor *borderColor;
+    if (floorLayoutAttributes.borderColor && ceilingLayoutAttributes.borderColor)
+    {
+        size_t floorNumberOfComponents = CGColorGetNumberOfComponents(floorLayoutAttributes.borderColor.CGColor);
+        size_t ceilingNumberOfComponents = CGColorGetNumberOfComponents(ceilingLayoutAttributes.borderColor.CGColor);
+        
+        const CGFloat *floorComponents = CGColorGetComponents(floorLayoutAttributes.borderColor.CGColor);
+        const CGFloat *ceilingComponents = CGColorGetComponents(ceilingLayoutAttributes.borderColor.CGColor);
+        
+        if (floorNumberOfComponents == 2)
+        {
+            CGFloat floorWhite = floorComponents[0];
+            CGFloat floorAlpha = floorComponents[1];
+            
+            if (ceilingNumberOfComponents == 2)
+            {
+                CGFloat ceilingWhite = ceilingComponents[0];
+                CGFloat ceilingAlpha = ceilingComponents[1];
+                borderColor = [UIColor colorWithRed:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                            green:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                             blue:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                            alpha:[self interpolateFromValue:floorAlpha
+                                                                     toValue:ceilingAlpha
+                                                                withProgress:relativeProgress]];
+            }
+            else if (ceilingNumberOfComponents == 4)
+            {
+                CGFloat ceilingRed = ceilingComponents[0];
+                CGFloat ceilingGreen = ceilingComponents[1];
+                CGFloat ceilingBlue = ceilingComponents[2];
+                CGFloat ceilingAlpha = ceilingComponents[3];
+                borderColor = [UIColor colorWithRed:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingRed
+                                                                withProgress:relativeProgress]
+                                            green:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingGreen
+                                                                withProgress:relativeProgress]
+                                             blue:[self interpolateFromValue:floorWhite
+                                                                     toValue:ceilingBlue
+                                                                withProgress:relativeProgress]
+                                            alpha:[self interpolateFromValue:floorAlpha
+                                                                     toValue:ceilingAlpha
+                                                                withProgress:relativeProgress]];
+            }
+            else
+            {
+                borderColor = floorLayoutAttributes.textColor;
+            }
+        }
+        else if (floorNumberOfComponents == 4)
+        {
+            CGFloat floorRed = floorComponents[0];
+            CGFloat floorGreen = floorComponents[1];
+            CGFloat floorBlue = floorComponents[2];
+            CGFloat floorAlpha = floorComponents[3];
+            
+            if (ceilingNumberOfComponents == 2)
+            {
+                CGFloat ceilingWhite = ceilingComponents[0];
+                CGFloat ceilingAlpha = ceilingComponents[1];
+                borderColor = [UIColor colorWithRed:[self interpolateFromValue:floorRed
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                            green:[self interpolateFromValue:floorGreen
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                             blue:[self interpolateFromValue:floorBlue
+                                                                     toValue:ceilingWhite
+                                                                withProgress:relativeProgress]
+                                            alpha:[self interpolateFromValue:floorAlpha
+                                                                     toValue:ceilingAlpha
+                                                                withProgress:relativeProgress]];
+            }
+            else if (ceilingNumberOfComponents == 4)
+            {
+                CGFloat ceilingRed = ceilingComponents[0];
+                CGFloat ceilingGreen = ceilingComponents[1];
+                CGFloat ceilingBlue = ceilingComponents[2];
+                CGFloat ceilingAlpha = ceilingComponents[3];
+                borderColor = [UIColor colorWithRed:[self interpolateFromValue:floorRed
+                                                                     toValue:ceilingRed
+                                                                withProgress:relativeProgress]
+                                            green:[self interpolateFromValue:floorGreen
+                                                                     toValue:ceilingGreen
+                                                                withProgress:relativeProgress]
+                                             blue:[self interpolateFromValue:floorBlue
+                                                                     toValue:ceilingBlue
+                                                                withProgress:relativeProgress]
+                                            alpha:[self interpolateFromValue:floorAlpha
+                                                                     toValue:ceilingAlpha
+                                                                withProgress:relativeProgress]];
+            }
+            else
+            {
+                borderColor = floorLayoutAttributes.textColor;
+            }
+        }
+        else
+        {
+            borderColor = floorLayoutAttributes.textColor;
+        }
+    }
+    else
+    {
+        borderColor = nil;
+    }
+    
     // Interpolate Font PointSize
     CGFloat fontPointSize;
     if (floorLayoutAttributes.fontPointSize > 0.0f && ceilingLayoutAttributes.fontPointSize > 0.0f)
@@ -342,6 +456,10 @@
     }
     subview.layer.cornerRadius = cornerRadius;
     subview.layer.borderWidth = borderWidth;
+    if (borderColor)
+    {
+        subview.layer.borderColor = borderColor.CGColor;
+    }
     if ([subview respondsToSelector:@selector(font)] && fontPointSize > 0.0f)
     {
         UIFont *font = [subview performSelector:@selector(font)];
