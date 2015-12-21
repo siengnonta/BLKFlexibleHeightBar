@@ -307,6 +307,11 @@
                                               toValue:ceilingLayoutAttributes.cornerRadius
                                          withProgress:relativeProgress];
     
+    // Interpolate Border Width
+    CGFloat borderWidth = [self interpolateFromValue:floorLayoutAttributes.borderWidth
+                                             toValue:ceilingLayoutAttributes.borderWidth
+                                        withProgress:relativeProgress];
+    
     // Interpolate Font PointSize
     CGFloat fontPointSize;
     if (floorLayoutAttributes.fontPointSize > 0.0f && ceilingLayoutAttributes.fontPointSize > 0.0f)
@@ -336,6 +341,7 @@
         [subview performSelector:@selector(setTextColor:) withObject:textColor];
     }
     subview.layer.cornerRadius = cornerRadius;
+    subview.layer.borderWidth = borderWidth;
     if ([subview respondsToSelector:@selector(font)] && fontPointSize > 0.0f)
     {
         UIFont *font = [subview performSelector:@selector(font)];

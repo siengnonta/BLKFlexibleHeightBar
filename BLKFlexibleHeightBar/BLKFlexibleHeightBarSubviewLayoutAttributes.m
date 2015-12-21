@@ -36,6 +36,7 @@
         _hidden = NO;
         _textColor = nil;
         _cornerRadius = 0.0f;
+        _borderWidth = 0.0f;
         _fontPointSize = 0.0f;
     }
     
@@ -57,6 +58,7 @@
         _hidden = layoutAttributes.hidden;
         _textColor = layoutAttributes.textColor;
         _cornerRadius = layoutAttributes.cornerRadius;
+        _borderWidth = layoutAttributes.borderWidth;
         _fontPointSize = layoutAttributes.fontPointSize;
     }
     
@@ -138,6 +140,11 @@
 - (void)setCornerRadius:(CGFloat)cornerRadius
 {
     _cornerRadius = cornerRadius;
+}
+
+- (void)setBorderWidth:(CGFloat)borderWidth
+{
+    _borderWidth = borderWidth;
 }
 
 - (void)setFontPointSize:(CGFloat)fontPointSize
