@@ -303,14 +303,30 @@
     }
     
     // Interpolate Corner Radius
-    CGFloat cornerRadius = [self interpolateFromValue:floorLayoutAttributes.cornerRadius
-                                              toValue:ceilingLayoutAttributes.cornerRadius
-                                         withProgress:relativeProgress];
+    CGFloat cornerRadius;
+    if (floorLayoutAttributes.cornerRadius == ceilingLayoutAttributes.cornerRadius)
+    {
+        cornerRadius = subview.layer.cornerRadius;
+    }
+    else
+    {
+        cornerRadius = [self interpolateFromValue:floorLayoutAttributes.cornerRadius
+                                          toValue:ceilingLayoutAttributes.cornerRadius
+                                     withProgress:relativeProgress];
+    }
     
     // Interpolate Border Width
-    CGFloat borderWidth = [self interpolateFromValue:floorLayoutAttributes.borderWidth
-                                             toValue:ceilingLayoutAttributes.borderWidth
-                                        withProgress:relativeProgress];
+    CGFloat borderWidth;
+    if (floorLayoutAttributes.borderWidth == ceilingLayoutAttributes.borderWidth)
+    {
+        borderWidth = subview.layer.borderWidth;
+    }
+    else
+    {
+        borderWidth = [self interpolateFromValue:floorLayoutAttributes.borderWidth
+                                         toValue:ceilingLayoutAttributes.borderWidth
+                                    withProgress:relativeProgress];
+    }
     
     // Interpolate Border Color
     UIColor *borderColor;
@@ -428,15 +444,24 @@
     
     // Interpolate Font PointSize
     CGFloat fontPointSize;
-    if (floorLayoutAttributes.fontPointSize > 0.0f && ceilingLayoutAttributes.fontPointSize > 0.0f)
+    if (floorLayoutAttributes.fontPointSize == ceilingLayoutAttributes.fontPointSize)
+    {
+        if ([subview respondsToSelector:@selector(font)])
+        {
+            UIFont *font = [subview performSelector:@selector(font)];
+            
+            fontPointSize = font.pointSize;
+        }
+        else
+        {
+            fontPointSize = 0.0f;
+        }
+    }
+    else
     {
         fontPointSize = [self interpolateFromValue:floorLayoutAttributes.fontPointSize
                                            toValue:ceilingLayoutAttributes.fontPointSize
                                       withProgress:relativeProgress];
-    }
-    else
-    {
-        fontPointSize = 0.0f;
     }
     
     // Apply updated attributes
