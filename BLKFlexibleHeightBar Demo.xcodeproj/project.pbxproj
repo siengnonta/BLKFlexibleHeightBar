@@ -17,9 +17,9 @@
 		3AE88A3B1EB1ACA400222D22 /* BLKFlexibleHeightBarSubviewLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 930EBFAF1A84ABFC00A67CCA /* BLKFlexibleHeightBarSubviewLayoutAttributes.m */; };
 		3AE88A3C1EB1ACBD00222D22 /* BLKFlexibleHeightBarBehaviorDefiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 93ED25431A92C44A00DBCAA8 /* BLKFlexibleHeightBarBehaviorDefiner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AE88A3D1EB1ACC100222D22 /* BLKFlexibleHeightBarBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 93ED25441A92C44A00DBCAA8 /* BLKFlexibleHeightBarBehaviorDefiner.m */; };
-		3AE88A3E1EB1ACC400222D22 /* SquareCashStyleBehaviorDefiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 9353CB1E1AAA372E003E134E /* SquareCashStyleBehaviorDefiner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AE88A3E1EB1ACC400222D22 /* SquareCashStyleBehaviorDefiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 9353CB1E1AAA372E003E134E /* SquareCashStyleBehaviorDefiner.h */; };
 		3AE88A3F1EB1ACC600222D22 /* SquareCashStyleBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9353CB1F1AAA372E003E134E /* SquareCashStyleBehaviorDefiner.m */; };
-		3AE88A401EB1ACC900222D22 /* FacebookStyleBarBehaviorDefiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 9353CB1B1AA9B230003E134E /* FacebookStyleBarBehaviorDefiner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AE88A401EB1ACC900222D22 /* FacebookStyleBarBehaviorDefiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 9353CB1B1AA9B230003E134E /* FacebookStyleBarBehaviorDefiner.h */; };
 		3AE88A411EB1ACCD00222D22 /* FacebookStyleBarBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9353CB1C1AA9B230003E134E /* FacebookStyleBarBehaviorDefiner.m */; };
 		3AE88A421EB1ACCF00222D22 /* BLKDelegateSplitter.h in Headers */ = {isa = PBXBuildFile; fileRef = 930EBFB01A84ABFC00A67CCA /* BLKDelegateSplitter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AE88A431EB1ACD200222D22 /* BLKDelegateSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 930EBFB11A84ABFC00A67CCA /* BLKDelegateSplitter.m */; };
