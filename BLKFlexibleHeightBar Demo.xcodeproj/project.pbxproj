@@ -23,6 +23,7 @@
 		3AE88A411EB1ACCD00222D22 /* FacebookStyleBarBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9353CB1C1AA9B230003E134E /* FacebookStyleBarBehaviorDefiner.m */; };
 		3AE88A421EB1ACCF00222D22 /* BLKDelegateSplitter.h in Headers */ = {isa = PBXBuildFile; fileRef = 930EBFB01A84ABFC00A67CCA /* BLKDelegateSplitter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3AE88A431EB1ACD200222D22 /* BLKDelegateSplitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 930EBFB11A84ABFC00A67CCA /* BLKDelegateSplitter.m */; };
+		690B6E221EB306EE00F63C72 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3AE88A2B1EB1AC0700222D22 /* Info.plist */; };
 		930EBF891A84AB4B00A67CCA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 930EBF881A84AB4B00A67CCA /* main.m */; };
 		930EBF8C1A84AB4B00A67CCA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 930EBF8B1A84AB4B00A67CCA /* AppDelegate.m */; };
 		930EBF8F1A84AB4B00A67CCA /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 930EBF8E1A84AB4B00A67CCA /* DemoViewController.m */; };
@@ -384,6 +385,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				690B6E221EB306EE00F63C72 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
