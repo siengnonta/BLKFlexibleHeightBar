@@ -19,6 +19,12 @@
 
 #import <UIKit/UIKit.h>
 
+//! Project version number for BLKFlexibleHeightBar.
+FOUNDATION_EXPORT double BLKFlexibleHeightBarVersionNumber;
+
+//! Project version string for BLKFlexibleHeightBar.
+FOUNDATION_EXPORT const unsigned char BLKFlexibleHeightBarVersionString[];
+
 #import "BLKFlexibleHeightBarBehaviorDefiner.h"
 #import "BLKFlexibleHeightBarSubviewLayoutAttributes.h"
 #import "UIView+BLKFlexibleHeightBarSubview.h"
