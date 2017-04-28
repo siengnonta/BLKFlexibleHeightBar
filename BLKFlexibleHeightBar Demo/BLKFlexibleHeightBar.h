@@ -28,6 +28,7 @@ FOUNDATION_EXPORT const unsigned char BLKFlexibleHeightBarVersionString[];
 #import "BLKFlexibleHeightBarBehaviorDefiner.h"
 #import "BLKFlexibleHeightBarSubviewLayoutAttributes.h"
 #import "UIView+BLKFlexibleHeightBarSubview.h"
+#import "BLKDelegateSplitter.h"
 
 /**
  The `BLKFlexibleHeightBar` class is responsible for adjusting the layout attributes (i.e. frame, transform, alpha) of its subviews depending on its current height.
